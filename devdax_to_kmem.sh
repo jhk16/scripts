@@ -15,8 +15,10 @@ done
 
 for entry in ${dax_arr[@]}
 do
-    echo "Unbinding $entry..."
-    echo $entry > $dax_path/device_dax/unbind
-    echo "Adding volatile-memory $entry..."
-    echo $entry > $dax_path/kmem/new_id
+    daxctl reconfigure-device --mode=system-ram --no-online dax0.0
+    daxctl reconfigure-device --mode=system-ram --no-online dax1.0
+    # echo "Unbinding $entry..."
+    # echo $entry > $dax_path/device_dax/unbind
+    # echo "Adding volatile-memory $entry..."
+    # echo $entry > $dax_path/kmem/new_id
 done

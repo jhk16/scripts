@@ -1,16 +1,20 @@
 #!/bin/bash
 
 watch -n1 "
+cat /proc/lapinfo | grep -A1 pages | grep Node;
+cat /proc/zoneinfo | \
+	grep -E 'nr_deferred|nr_tracked|nr_isolated_anon' | paste - - -
 cat /proc/vmstat | \
-	grep -E 'pgmigrate|pgexchange|pgactivate_deferred|pgreference|nr_page_skipped|pgexchanged_skip'; \
+	grep -E \
+'migrate|demote|promote|exchange|pte_update|fault|reserved|scantype' | paste - -
+ cat /proc/zoneinfo | \
+ 	grep -E 'hmem_demote_dst' | paste - -
+cat /proc/zoneinfo | \
+	grep -E 'hmem_promote_local_dst|hmem_promote_local_fail_dst' | paste - -
+cat /proc/zoneinfo | \
+	grep -E 'hmem_promote_remote_dst|hmem_promote_remote_fail_dst' | paste - -
 cat /proc/zoneinfo | \
 	grep -E 'hmem_migrate_dst|hmem_migrate_fail_dst' | paste - -
-cat /proc/zoneinfo | \
-	grep -E 'hmem_demote_dst|hmem_demote_src' | paste - -
-cat /proc/zoneinfo | \
-	grep -E 'nr_deferred|nr_exchanged|isolated_anon' | paste - - -
-cat /proc/zoneinfo | \
-	grep -E 'nr_cold'
 ps -aux | \
-	grep -E 'kexchanged' | grep -v grep
+	grep -E 'kswapd' | grep -v grep
 "
