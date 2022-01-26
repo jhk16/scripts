@@ -1,8 +1,8 @@
 #/bin/bash
 
 # You need to modify the kernel source root path & Linux release image path
-KERNEL=./ 
-IMAGE=${HOME}/git/scripts
+KERNEL=./
+IMAGE=./
 
 # Check below kernel configurations
 ## For debugging

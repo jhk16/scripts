@@ -16,9 +16,7 @@ DIR=chroot
 PREINSTALL_PKGS=openssh-server,curl,tar,gcc,libc6-dev,time,strace,sudo,less,psmisc
 
 # If ADD_PACKAGE is not defined as an external environment variable, use our default packages
-if [ -z ${ADD_PACKAGE+x} ]; then
-    ADD_PACKAGE="cmake,make,git,vim,tmux,usbutils,tcpdump,net-tools"
-fi
+ADD_PACKAGE="cmake,make,git,vim,tmux,usbutils,tcpdump,net-tools"
 
 # Variables affected by options
 RELEASE=bionic
